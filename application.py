@@ -40,7 +40,7 @@ def callback():
     # 署名検証で失敗した場合、例外を出す。
     except InvalidSignatureError:
         abort(400)
-　   # handleの処理を終えればOK
+    # handleの処理を終えればOK
     return 'OK'
  
 ## 2 ##

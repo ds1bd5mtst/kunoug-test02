@@ -65,10 +65,10 @@ def handle_message(event):
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     messages =""
-    if event.message.text == "あ":
-        messages = "aaaaaa"
+    if event.message.text == "一覧" or event.message.text == "いちらん":
+        messages = "一覧は作成中です"
     else:
-        messages = "iiiiii"
+        messages = "よくわかりません"
         
     line_bot_api.reply_message(
         event.reply_token,

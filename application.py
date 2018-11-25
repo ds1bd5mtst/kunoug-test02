@@ -64,7 +64,7 @@ def handle_message(event):
 """
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    messages ="a"
+    messages =""
     if event.message.text == "あ":
         messages = "aaaaaa"
     else:

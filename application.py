@@ -64,10 +64,10 @@ def handle_message(event):
 """
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    if event.message.text == "あ":
-        messages = "aaaaaa"
-    else:
-        messages = "iiiiii"
+#    if event.message.text == "あ":
+#        messages = "aaaaaa"
+#    else:
+#        messages = "iiiiii"
         
     line_bot_api.reply_message(
         event.reply_token,

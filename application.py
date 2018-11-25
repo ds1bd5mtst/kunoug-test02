@@ -64,14 +64,15 @@ def handle_message(event):
 """
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-#    if event.message.text == "あ":
-#        messages = "aaaaaa"
-#    else:
-#        messages = "iiiiii"
+    messages ="a"
+    if event.message.text == "あ":
+        messages = "aaaaaa"
+    else:
+        messages = "iiiiii"
         
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text="messages")) # messagesに代入されている値を返してくれる
+        TextSendMessage(text=messages)) # messagesに代入されている値を返してくれる
  
 # ポート番号の設定
 if __name__ == "__main__":

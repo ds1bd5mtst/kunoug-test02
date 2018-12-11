@@ -10,6 +10,10 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
 import os
+
+from azure.storage.blob import BlockBlobService
+from azure.storage.blob import PublicAccess
+
  
 app = Flask(__name__)
  

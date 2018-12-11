@@ -78,11 +78,12 @@ def handle_message(event):
     service = BlockBlobService(account_name=account_name,account_key=account_key)
     service.get_blob_to_path(container_name,file_name,'test02.csv')
     
+    
     df = pandas.read_csv(file_name)
     
     list = []
     for index, row in df.iterrows():
-        if row["title"].find(event.message.text) != -1:
+        if row["title"].find("k1") != -1:
         # 見つかった場合
         list.append(row["title"])
     # 重複排除

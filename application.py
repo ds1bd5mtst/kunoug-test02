@@ -81,12 +81,13 @@ def handle_message(event):
     
     df = pandas.read_csv(file_name)
     
-    """
+    
     list = []
     for index, row in df.iterrows():
         if row["title"].find(event.message.text) != -1:
         # 見つかった場合
         list.append(row["title"])
+    """
     # 重複排除
     result_list = set(list)
     messages = ','.join(result_list)

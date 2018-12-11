@@ -94,7 +94,7 @@ def handle_message(event):
             list.append(row["title"])
 #        else:
 #            messages = "なかった"
-    result = set(list)
+    result = str(set(list))
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=result))

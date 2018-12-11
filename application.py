@@ -11,7 +11,7 @@ from linebot.models import (
 )
 import os
 
-import pandas as pd
+import pandas
  
 app = Flask(__name__)
  

@@ -113,7 +113,7 @@ def handle_message(event):
 """
 
 # ファイルの削除
-    os.remove(file_name)
+#    os.remove(file_name)
 
  
 # ポート番号の設定

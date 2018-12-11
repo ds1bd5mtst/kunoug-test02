@@ -87,7 +87,7 @@ def handle_message(event):
     # 検索した結果の応答
     #kensaku = "k1"
     list = []
-    messages =""
+    #messages =""
     for index, row in df.iterrows():
         #print(row["title"])
         if row["title"].find(event.message.text) != -1:
@@ -95,9 +95,9 @@ def handle_message(event):
 #        else:
 #            messages = "なかった"
     result = set(list)
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=result))
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=result))
 
 """
 # 特定メッセージへの応答 

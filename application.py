@@ -93,7 +93,7 @@ def handle_message(event):
     
     
     # ファイルの削除
-    os.remove(file_name)
+    #os.remove(file_name)
     
     messages =""
     if event.message.text == "一覧" or event.message.text == "いちらん":

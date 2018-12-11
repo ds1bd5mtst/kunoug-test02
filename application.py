@@ -87,12 +87,10 @@ def handle_message(event):
         if row["title"].find(event.message.text) != -1:
         # 見つかった場合
         list.append(row["title"])
-    """
-    # 重複排除
-    result_list = set(list)
-    messages = ','.join(result_list)
     
-    """
+    # 重複排除
+    messages = ','.join(set(list))
+    
     
     # ファイルの削除
     os.remove(file_name)

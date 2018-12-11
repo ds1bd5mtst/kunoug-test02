@@ -14,6 +14,8 @@ import os
 from azure.storage.blob import BlockBlobService
 from azure.storage.blob import PublicAccess
 
+import pandas as pd
+
 app = Flask(__name__)
  
 #環境変数取得
@@ -115,7 +117,7 @@ def handle_message(event):
 """
 
 # ファイルの削除
-#    os.remove(file_name)
+    os.remove(file_name)
 
  
 # ポート番号の設定

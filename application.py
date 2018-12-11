@@ -12,7 +12,11 @@ from linebot.models import (
 import os
 
 import pandas
- 
+
+from azure.storage.blob import (
+    BlockBlobService, PublicAccess
+)
+
 app = Flask(__name__)
  
 #環境変数取得

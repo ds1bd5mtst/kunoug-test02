@@ -7,8 +7,9 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+    MessageEvent, TextMessage, TextSendMessage
 )
+
 import os
 
 from azure.storage.blob import BlockBlobService
@@ -17,7 +18,7 @@ from azure.storage.blob import PublicAccess
 import pandas as pd
 
 app = Flask(__name__)
- 
+
 #環境変数取得
 # LINE Developersで設定されているアクセストークンとChannel Secretをを取得し、設定します。
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
@@ -102,6 +103,9 @@ def handle_message(event):
         event.reply_token,
         TextSendMessage(text=result))
 
+# ファイルの削除
+    os.remove(file_name)
+
 
 """
 # 特定メッセージへの応答 
@@ -116,10 +120,7 @@ def handle_message(event):
         TextSendMessage(text=messages)) # messagesに代入されている値を返してくれる
 """
 
-# ファイルの削除
-    os.remove(file_name)
 
- 
 # ポート番号の設定
 if __name__ == "__main__":
 #    app.run()

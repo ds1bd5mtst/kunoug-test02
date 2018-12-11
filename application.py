@@ -10,7 +10,10 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
 import os
- 
+
+from azure.storage.blob import BlockBlobService
+from azure.storage.blob import PublicAccess
+
 app = Flask(__name__)
  
 #環境変数取得
@@ -56,14 +59,48 @@ def callback():
 
 
 """
+# おうむ返し用（練習用）
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=event.message.text)) #ここでオウム返しのメッセージを返します。
 """
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+
+# blobからcsvダウンロード
+# ストレージアカウント情報
+    account_name='ds1bd5mtst'
+    account_key='QRW6ikCh6i2TAOZsJnAuliDJX03xU8xmm3GVhsLFD8cw3Z9yjOLZVE3CYdgKpV+74D4y1dKCsK6bd5fjUup3LQ=='
+    container_name='testcontainer'
+    file_name='test02.csv'
+
+    service = BlockBlobService(account_name=account_name,account_key=account_key)
+    service.get_blob_to_path(container_name,file_name,'test02.csv')
+    
+    # ファイル読み込み
+    a = pd.read_csv(file_name)
+
+
+    # 検索した結果の応答
+    #kensaku = "k1"
+    list = []
+    messages =""
+    for index, row in df.iterrows():
+        #print(row["title"])
+        if row["title"].find(event.message.text) != -1:
+            list.append(row["title"])
+#        else:
+#            messages = "なかった"
+    result = set(list)
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=result))
+
+"""
+# 特定メッセージへの応答 
     messages =""
     if event.message.text == "一覧" or event.message.text == "いちらん":
         messages = "一覧は作成中です"
@@ -73,6 +110,11 @@ def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=messages)) # messagesに代入されている値を返してくれる
+"""
+
+# ファイルの削除
+    os.remove(file_name)
+
  
 # ポート番号の設定
 if __name__ == "__main__":

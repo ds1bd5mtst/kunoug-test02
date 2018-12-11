@@ -72,7 +72,7 @@ def handle_message(event):
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-
+"""
 # blobからcsvダウンロード
 # ストレージアカウント情報
     account_name='ds1bd5mtst'
@@ -83,7 +83,7 @@ def handle_message(event):
     service = BlockBlobService(account_name=account_name,account_key=account_key)
     service.get_blob_to_path(container_name,file_name,'test02.csv')
 
-"""
+
     
     # ファイル読み込み
     df = pd.read_csv(file_name)
@@ -109,7 +109,6 @@ def handle_message(event):
     os.remove(file_name)
 """
 
-"""
 # 特定メッセージへの応答 
     messages =""
     if event.message.text == "一覧" or event.message.text == "いちらん":
@@ -120,7 +119,7 @@ def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=messages)) # messagesに代入されている値を返してくれる
-"""
+
 
 
 # ポート番号の設定

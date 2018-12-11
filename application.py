@@ -83,7 +83,7 @@ def handle_message(event):
     service.get_blob_to_path(container_name,file_name,'test02.csv')
     
     # ファイル読み込み
-    a = pd.read_csv(file_name)
+    df = pd.read_csv(file_name)
 
 
     # 検索した結果の応答

@@ -89,7 +89,7 @@ def handle_message(event):
         list.append(row["title"])
     
     # 重複排除
-    messages = ','.join(set(list))
+    #messages = ','.join(set(list))
     
     
     # ファイルの削除

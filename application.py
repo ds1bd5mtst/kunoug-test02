@@ -11,9 +11,7 @@ from linebot.models import (
 )
 import os
 
-from azure.storage.blob import BlockBlobService
-from azure.storage.blob import PublicAccess
-
+import pandas as pd
  
 app = Flask(__name__)
  

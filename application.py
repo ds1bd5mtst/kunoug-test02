@@ -15,7 +15,7 @@ import os
 from azure.storage.blob import BlockBlobService
 from azure.storage.blob import PublicAccess
 
-import pandas as pd
+#import pandas as pd
 
 app = Flask(__name__)
 
@@ -82,6 +82,8 @@ def handle_message(event):
 
     service = BlockBlobService(account_name=account_name,account_key=account_key)
     service.get_blob_to_path(container_name,file_name,'test02.csv')
+
+"""
     
     # ファイル読み込み
     df = pd.read_csv(file_name)
@@ -105,7 +107,7 @@ def handle_message(event):
 
 # ファイルの削除
     os.remove(file_name)
-
+"""
 
 """
 # 特定メッセージへの応答 

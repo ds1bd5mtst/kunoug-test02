@@ -70,6 +70,15 @@ def handle_message(event):
 """
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    account_name='ds1bd5mtst'
+    account_key='QRW6ikCh6i2TAOZsJnAuliDJX03xU8xmm3GVhsLFD8cw3Z9yjOLZVE3CYdgKpV+74D4y1dKCsK6bd5fjUup3LQ=='
+    container_name='testcontainer'
+    file_name='test02.csv'
+    
+    service = BlockBlobService(account_name=account_name,account_key=account_key)
+    service.get_blob_to_path(container_name,file_name,'test02.csv')
+    
+    
     messages =""
     if event.message.text == "一覧" or event.message.text == "いちらん":
         messages = "一覧は作成中です"

@@ -94,10 +94,12 @@ def handle_message(event):
             list.append(row["title"])
 #        else:
 #            messages = "なかった"
-    result = ','.join(set(list))
+#    result = ','.join(set(list))
+    result = "test"
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=result))
+
 
 """
 # 特定メッセージへの応答 

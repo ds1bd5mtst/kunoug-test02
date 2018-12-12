@@ -85,17 +85,15 @@ def handle_message(event):
     list = []
     for index, row in df.iterrows():
         if row["title"].find(event.message.text) != -1:
-        # 見つかった場合
-        list.append(row["title"])
+            list.append(row["title"])
     
     # 重複排除
-    #messages = ','.join(set(list))
-    
+    messages = ','.join(set(list))
     
     # ファイルの削除
-    #os.remove(file_name)
+    os.remove(file_name)
     
-    messages =""
+    messages = ""
     if event.message.text == "一覧" or event.message.text == "いちらん":
         messages = "一覧は作成中です"
     else:

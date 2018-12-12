@@ -92,13 +92,13 @@ def handle_message(event):
     
     # ファイルの削除
     os.remove(file_name)
-    
+    """
     messages = ""
     if event.message.text == "一覧" or event.message.text == "いちらん":
         messages = "一覧は作成中です"
     else:
         messages = "よくわかりません"
-    
+    """
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=messages)) # messagesに代入されている値を返してくれる

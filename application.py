@@ -11,7 +11,7 @@ from linebot.models import (
 )
 import os
 
-import pandas
+import pandas as pd
 
 from azure.storage.blob import (
     BlockBlobService, PublicAccess
@@ -79,7 +79,7 @@ def handle_message(event):
     service.get_blob_to_path(container_name,file_name,'test02.csv')
     
     
-    df = pandas.read_csv(file_name)
+    df = pd.read_csv(file_name)
     
     
     list = []

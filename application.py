@@ -113,7 +113,7 @@ def handle_message(event):
                 messages = "そんな本ないよ"
     
     try:
-        df.to_csv(file_name)drop(["Unnamed: 0"],axis=1)
+        df.to_csv(file_name).drop(["Unnamed: 0"],axis=1)
     except:
         message = "error"
         df.to_csv(file_name)

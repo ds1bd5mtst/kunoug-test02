@@ -73,15 +73,16 @@ def handle_message(event):
     account_name='ds1bd5mtst'
     account_key='QRW6ikCh6i2TAOZsJnAuliDJX03xU8xmm3GVhsLFD8cw3Z9yjOLZVE3CYdgKpV+74D4y1dKCsK6bd5fjUup3LQ=='
     container_name='testcontainer'
-    file_name='test02.csv'
+    file_name='bookdata.csv'
     
     service = BlockBlobService(account_name=account_name,account_key=account_key)
-    service.get_blob_to_path(container_name,file_name,'test02.csv')
+    service.get_blob_to_path(container_name,file_name,'bookdata.csv')
     
-    
+    # CSV読み込み
     df = pd.read_csv(file_name)
     
-    
+    """
+    # 検索
     list = []
     for index, row in df.iterrows():
         if row["title"].find(event.message.text) != -1:
@@ -89,6 +90,28 @@ def handle_message(event):
     
     # 重複排除
     messages = ','.join(set(list))
+    """
+    
+    for index, row in df.iterrows():
+        # 指定されたタイトル名の本があった場合
+        if row["title"] == event.message.text :
+        # 貸出可能な場合
+            if row["status"] == 0 :
+                df.loc[df['status'] == 0, ['status']] = 1
+                # rentaluserに代入する値にはLINEIDを入れる
+                df.loc[df['rentaluser'] == 0, ['rentaluser']] = 1
+                messages = "借りれるよ（仮）"
+                break
+            else:
+                messages = "誰か借りてる"
+        # 指定されたタイトル名の本がなかった場合
+        else:
+            if messages != "誰か借りてる":
+                messages = "そんな本ないよ"
+    
+    service.create_blob_from_path(container_name,file_name,file_name)
+    
+    
     
     # ファイルの削除
     os.remove(file_name)
@@ -99,6 +122,9 @@ def handle_message(event):
     else:
         messages = "よくわかりません"
     """
+    
+    
+    
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=messages)) # messagesに代入されている値を返してくれる

@@ -92,6 +92,7 @@ def handle_message(event):
     messages = ','.join(set(list))
     """
     
+    messages = ""
     for index, row in df.iterrows():
         # 指定されたタイトル名の本があった場合
         if row["title"] == event.message.text :

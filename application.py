@@ -92,7 +92,7 @@ def handle_message(event):
     # 重複排除
     messages = ','.join(set(list))
     
-    """
+    
     messages = ""
     
     for index, row in df.iterrows():
@@ -113,7 +113,7 @@ def handle_message(event):
                 messages = "そんな本ないよ"
     
     #service.create_blob_from_path(container_name,file_name,file_name)
-    """
+    
     
     
     # ファイルの削除

@@ -99,8 +99,8 @@ def handle_message(event):
         # 指定されたタイトル名の本があった場合
         if row["title"] == event.message.text :
             # 貸出可能な場合
-            if row["status"] == "0" :
-                df.loc[df['status'] == "0", ['status']] = 1
+            if row["status"] == 0 :
+                df.loc[df['status'] == 0, ['status']] = 1
                 # rentaluserに代入する値にはLINEIDを入れる
                 df.loc[df['rentaluser'] == 0, ['rentaluser']] = 1
                 messages = "借りれるよ（仮）"

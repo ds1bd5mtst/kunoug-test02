@@ -100,7 +100,7 @@ def handle_message(event):
         if row["title"] == event.message.text :
             # 貸出可能な場合
             if row["status"] == 0:
-                row['status'] = 1
+                df.at[event.message.text, 'status'] = 1
                 # rentaluserに代入する値にはLINEIDを入れる
                 #df.loc[df['rentaluser'] == 0, ['rentaluser']] = 1
                 messages = "借りれるよ（仮）" + str(row["status"])

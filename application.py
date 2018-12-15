@@ -100,9 +100,9 @@ def handle_message(event):
         if row["title"] == event.message.text :
             # 貸出可能な場合
             if row["status"] == 0:
-                df.loc[df['status'] == 0, ['status']] = 1
+                df['status'][0] = 1
                 # rentaluserに代入する値にはLINEIDを入れる
-                df.loc[df['rentaluser'] == 0, ['rentaluser']] = 1
+                #df.loc[df['rentaluser'] == 0, ['rentaluser']] = 1
                 messages = "借りれるよ（仮）" + str(row["status"])
                 break
             else:
@@ -112,6 +112,7 @@ def handle_message(event):
             if messages != "誰か借りてる":
                 messages = "そんな本ないよ"
     
+    df.to_csv(file_name)
     service.create_blob_from_path(container_name,file_name,file_name)
     
     

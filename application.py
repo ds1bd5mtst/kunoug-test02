@@ -68,6 +68,7 @@ def handle_message(event):
         event.reply_token,
         TextSendMessage(text=event.message.text)) #ここでオウム返しのメッセージを返します。
 """
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     account_name='ds1bd5mtst'
@@ -96,18 +97,20 @@ def handle_message(event):
     for index, row in df.iterrows():
         # 指定されたタイトル名の本があった場合
         if row["title"] == event.message.text :
+"""
         # 貸出可能な場合
-            if row["status"] == 0 :
-                df.loc[df['status'] == 0, ['status']] = 1
+            if row["status"] == "0" :
+                df.loc[df['status'] == "0", ['status']] = 1
                 # rentaluserに代入する値にはLINEIDを入れる
                 df.loc[df['rentaluser'] == 0, ['rentaluser']] = 1
                 messages = "借りれるよ（仮）"
                 break
             else:
                 messages = "誰か借りてる"
+"""
         # 指定されたタイトル名の本がなかった場合
         else:
-            if messages != "誰か借りてる":
+#            if messages != "誰か借りてる":
                 messages = "そんな本ないよ"
     
     service.create_blob_from_path(container_name,file_name,file_name)

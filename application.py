@@ -97,6 +97,7 @@ def handle_message(event):
     for index, row in df.iterrows():
         # 指定されたタイトル名の本があった場合
         if row["title"] == event.message.text :
+            messages = "あ"
 """
         # 貸出可能な場合
             if row["status"] == "0" :

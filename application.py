@@ -103,10 +103,10 @@ def handle_message(event):
                 df.loc[index, 'status'] = 1
                 # rentaluserに代入する値にはLINEIDを入れる
                 #df.loc[df['rentaluser'] == 0, ['rentaluser']] = 1
-                messages = "借りれるよ（仮）" + str(row["status"])
+                messages = "借りれるよ（仮）"
                 break
             else:
-                messages = "誰か借りてる" + str(row["status"])
+                messages = "誰か借りてる"
         else:
             # 指定されたタイトル名の本がなかった場合
             if messages != "誰か借りてる":

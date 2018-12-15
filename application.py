@@ -82,7 +82,7 @@ def handle_message(event):
     # CSV読み込み
     df = pd.read_csv(file_name)
     
-    """
+    
     # 検索
     list = []
     for index, row in df.iterrows():
@@ -91,10 +91,10 @@ def handle_message(event):
     
     # 重複排除
     messages = ','.join(set(list))
-    """
     
-    messages = "aaa"
     """
+    messages = ""
+    
     for index, row in df.iterrows():
         # 指定されたタイトル名の本があった場合
         if row["title"] == event.message.text :
@@ -111,13 +111,15 @@ def handle_message(event):
             # 指定されたタイトル名の本がなかった場合
             if messages != "誰か借りてる":
                 messages = "そんな本ないよ"
-    """
-    #service.create_blob_from_path(container_name,file_name,file_name)
     
+    #service.create_blob_from_path(container_name,file_name,file_name)
+    """
     
     
     # ファイルの削除
     os.remove(file_name)
+    
+    
     """
     messages = ""
     if event.message.text == "一覧" or event.message.text == "いちらん":

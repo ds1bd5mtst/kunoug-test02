@@ -82,7 +82,7 @@ def handle_message(event):
     # CSV読み込み
     df = pd.read_csv(file_name)
     
-    
+    """
     # 検索
     list = []
     for index, row in df.iterrows():
@@ -91,7 +91,7 @@ def handle_message(event):
     
     # 重複排除
     messages = ','.join(set(list))
-    
+    """
     
     messages = ""
     

@@ -80,14 +80,12 @@ def handle_message(event):
     service = BlockBlobService(account_name=account_name,account_key=account_key)
     service.get_blob_to_path(container_name,file_name,'bookdata.csv')
     
-    # messages = "DLできたっぽい"
     
     # CSV読み込み
-    with cd.open(file_name, "r", "Shift-JIS", "ignore") as file:
+    #with cd.open(file_name, "r", "Shift-JIS", "ignore") as file:
     # df = pd.read_csv(filename)
-        df = pd.read_table(file,header=None,sep=',')
-    
-    #messages = "読み込みできたっぽい"
+    #    df = pd.read_table(file,header=None,sep=',')
+    df = pd.read_csv(file_name,encoding="shift_jis", sep=",")
     
     """
     # 検索

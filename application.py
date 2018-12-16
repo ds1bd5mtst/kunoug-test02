@@ -94,7 +94,7 @@ def handle_message(event):
     """
     
     messages = ""
-    
+    user_id = event.source.user_id
     for index, row in df.iterrows():
         # 指定されたタイトル名の本があった場合
         if row["title"] == event.message.text :
@@ -102,7 +102,7 @@ def handle_message(event):
             if row["status"] == 0:
                 df.loc[index, 'status'] = 1
                 # rentaluserに代入する値にはLINEIDを入れる
-                user_id        = event.source.user_id
+                # user_id        = event.source.user_id
                 df.loc[index, 'rentaluser'] = user_id
                 #df.loc[index, 'rentaluser'] = 1
                 messages = "借りれるよ" + str(user_id)

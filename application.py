@@ -87,7 +87,7 @@ def handle_message(event):
     # df = pd.read_csv(filename)
         df = pd.read_table(file,header=None,sep=',')
     
-    messages = "読み込みできたっぽい"
+    #messages = "読み込みできたっぽい"
     
     """
     # 検索

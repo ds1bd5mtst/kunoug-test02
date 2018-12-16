@@ -75,16 +75,41 @@ def handle_message(event):
     account_key='QRW6ikCh6i2TAOZsJnAuliDJX03xU8xmm3GVhsLFD8cw3Z9yjOLZVE3CYdgKpV+74D4y1dKCsK6bd5fjUup3LQ=='
     container_name='testcontainer'
     file_name='bookdata.csv'
+    file_name1='userdata.csv'
     
     service = BlockBlobService(account_name=account_name,account_key=account_key)
-    service.get_blob_to_path(container_name,file_name,'bookdata.csv')
+    service.get_blob_to_path(container_name,file_name,file_name)
+    service.get_blob_to_path(container_name,file_name1,file_name1)
+    
+    df1 = pd.read_csv(file_name1,encoding="shift_jis", sep=",")
+    
+    profile = line_bot_api.get_profile(event.source.user_id)
+    user_disp_name = profile.display_name
+    user_id = event.source.user_id
+    
+    messages = ""
+    for index, row in df1.iterrows():
+        if row["LINEID"] ==  user_id :
+            messages = "登録済"
+            break
+        else:
+            se = pd.Series([LINEID,username,userstatus],['LINEID','username','userstatus'])
+            df1 = df1.append(se, ignore_index=True)
+            LINEID = user_id
+            username = user_disp_name
+            userstatus = 0
+            df1.to_csv(file_name1,encoding="shift_jis")
+            service.create_blob_from_path(container_name,file_name1,file_name1)
+            messages = "登録しました"
     
     
+    """
     # CSV読み込み
     #with cd.open(file_name, "r", "Shift-JIS", "ignore") as file:
     # df = pd.read_csv(filename)
     #    df = pd.read_table(file,header=None,sep=',')
     df = pd.read_csv(file_name,encoding="shift_jis", sep=",")
+    """
     
     """
     # 検索
@@ -97,7 +122,7 @@ def handle_message(event):
     messages = ','.join(set(list))
     """
     
-    
+    """
     #借りる
     messages = ""
     for index, row in df.iterrows():
@@ -124,7 +149,7 @@ def handle_message(event):
     df.to_csv(file_name,encoding="shift_jis")
     
     service.create_blob_from_path(container_name,file_name,file_name)
-    
+    """
     
     
     """
@@ -155,7 +180,7 @@ def handle_message(event):
     
     # ファイルの削除
     os.remove(file_name)
-    
+    os.remove(file_name1)
     
     """
     messages = ""

@@ -87,9 +87,9 @@ def handle_message(event):
     user_disp_name = profile.display_name
     user_id = event.source.user_id
     
-    messages = "test"
+    #messages = "test"
     
-    """
+    
     messages = ""
     for index, row in df1.iterrows():
         if row["LINEID"] ==  user_id :
@@ -105,7 +105,7 @@ def handle_message(event):
             df1.to_csv(file_name1,encoding="shift_jis")
             service.create_blob_from_path(container_name,file_name1,file_name1)
             messages = "登録しました"
-    """
+    
     
     """
     # CSV読み込み

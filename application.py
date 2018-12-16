@@ -107,8 +107,9 @@ def handle_message(event):
             if row["status"] == 0:
                 df.loc[index, 'status'] = 1
                 # rentaluserに代入する値にはLINEIDを入れる
-                user_id = event.source.user_id
-                df.loc[index, 'rentaluser'] = user_id
+                user_disp_name = profile.display_name
+                #user_id = event.source.user_id
+                df.loc[index, 'rentaluser'] = user_disp_name
                 messages = "借りれるよ"
                 break
             else:

@@ -81,7 +81,7 @@ def handle_message(event):
     service.get_blob_to_path(container_name,file_name,file_name)
     service.get_blob_to_path(container_name,file_name1,file_name1)
     
-    df1 = pd.read_csv(file_name1)
+    df1 = pd.read_csv(file_name1,encoding="shift_jis", sep=",")
     
     profile = line_bot_api.get_profile(event.source.user_id)
     user_disp_name = profile.display_name

@@ -93,8 +93,9 @@ def handle_message(event):
     messages = ','.join(set(list))
     """
     
+    """
+    #借りる
     messages = ""
-    #user_id = event.source.user_id
     for index, row in df.iterrows():
         # 指定されたタイトル名の本があった場合
         if row["title"] == event.message.text :
@@ -104,8 +105,7 @@ def handle_message(event):
                 # rentaluserに代入する値にはLINEIDを入れる
                 user_id = event.source.user_id
                 df.loc[index, 'rentaluser'] = user_id
-                #df.loc[index, 'rentaluser'] = 1
-                messages = "借りれるよ" + str(user_id)
+                messages = "借りれるよ"
                 break
             else:
                 messages = "誰か借りてる"
@@ -114,6 +114,30 @@ def handle_message(event):
             if messages != "誰か借りてる":
                 messages = "そんな本ないよ"
     
+    df = df.drop(["Unnamed: 0"],axis=1)
+    df.to_csv(file_name)
+    
+    service.create_blob_from_path(container_name,file_name,file_name)
+    """
+
+# 3、返す
+    messages = ""
+    user_id = event.source.user_id
+    for index, row in df.iterrows():
+        # 指定されたタイトル名の本があった場合
+        if row["title"] == event.message.text :
+        # 借りてるユーザーが一致の場合（LINEIDと比較する必要あり）
+            if row["rentaluser"] == user_id :
+                df.loc[index, 'status'] = 0
+                df.loc[index, 'rentaluser'] = 0
+                messages = "返却しました"
+                break
+            else:
+                messages = "借りてないよ"
+        # 指定されたタイトル名の本がなかった場合
+        else:
+            if messages != "借りてないいよ":
+                messages = "そんな本ないよ"
     df = df.drop(["Unnamed: 0"],axis=1)
     df.to_csv(file_name)
     

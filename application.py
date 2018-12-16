@@ -12,6 +12,7 @@ from linebot.models import (
 import os
 
 import pandas as pd
+import codecs as cd
 
 from azure.storage.blob import (
     BlockBlobService, PublicAccess
@@ -82,7 +83,8 @@ def handle_message(event):
     # messages = "DLできたっぽい"
     
     # CSV読み込み
-    df = pd.read_csv(file_name)
+    with cd.open(file_name, "r", "Shift-JIS", "ignore") as file:
+        df = pd.read_csv(file_name)
     
     messages = "読み込みできたっぽい"
     

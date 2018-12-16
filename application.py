@@ -93,11 +93,11 @@ def handle_message(event):
             messages = "登録済"
             break
         else:
-            se = pd.Series([LINEID,username,userstatus],['LINEID','username','userstatus'])
-            df1 = df1.append(se, ignore_index=False)
             LINEID = user_id
             username = user_disp_name
             userstatus = 0
+            se = pd.Series([LINEID,username,userstatus],['LINEID','username','userstatus'])
+            df1 = df1.append(se, ignore_index=True)
             df1.to_csv(file_name1,encoding="shift_jis")
             service.create_blob_from_path(container_name,file_name1,file_name1)
             messages = "登録しました"

@@ -234,7 +234,7 @@ def handle_message(event):
                     messages = "借りてないよ"
             # 指定されたタイトル名の本がなかった場合
             else:
-                if messages != "借りてないいよ":
+                if messages != "借りてないよ":
                     messages = "そんな本ないよ"
         df = df.drop(["Unnamed: 0"],axis=1)
         df.to_csv(file_name,encoding="shift_jis")

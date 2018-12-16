@@ -84,7 +84,8 @@ def handle_message(event):
     
     # CSV読み込み
     with cd.open(file_name, "r", "Shift-JIS", "ignore") as file:
-        df = pd.read_csv(file_name)
+    # df = pd.read_csv(filename)
+        df = pd.read_table(file,header=None,sep=',')
     
     messages = "読み込みできたっぽい"
     

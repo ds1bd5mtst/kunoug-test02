@@ -144,7 +144,6 @@ def handle_message(event):
             df1.to_csv(file_name1,encoding="shift_jis")
             service.create_blob_from_path(container_name,file_name1,file_name1)
 
-
         # 返す案内
         elif event.message.text == "返す" or event.message.text == "かえす":
             messages = "返したい本のタイトルを教えてね(完全一致で)"
@@ -176,6 +175,8 @@ def handle_message(event):
                 df1.to_csv(file_name1,encoding="shift_jis")
                 service.create_blob_from_path(container_name,file_name1,file_name1)
     
+    
+    
     # 借りる処理
     elif status == 2:
         df = pd.read_csv(file_name,encoding="shift_jis", sep=",")
@@ -191,7 +192,7 @@ def handle_message(event):
                     user_disp_name = profile.display_name
                     #user_id = event.source.user_id
                     df.loc[index, 'rentaluser'] = user_disp_name
-                    messages = "借りれるよ"
+                    messages = "貸し出し完了したよ"
                     break
                 else:
                     messages = "誰か借りてる"
@@ -204,6 +205,15 @@ def handle_message(event):
         df.to_csv(file_name,encoding="shift_jis")
         
         service.create_blob_from_path(container_name,file_name,file_name)
+        
+        for index, row in df1.iterrows():
+            if row["LINEID"] ==  user_id:
+                df1.loc[index, 'userstatus'] = 0
+                df1 = df1.drop(["Unnamed: 0"],axis=1)
+                df1.to_csv(file_name1,encoding="shift_jis")
+                service.create_blob_from_path(container_name,file_name1,file_name1)
+    
+    
     
     
     # 返す処理
@@ -230,7 +240,12 @@ def handle_message(event):
         df.to_csv(file_name)
         
         service.create_blob_from_path(container_name,file_name,file_name)
-    
+        for index, row in df1.iterrows():
+            if row["LINEID"] ==  user_id:
+                df1.loc[index, 'userstatus'] = 0
+                df1 = df1.drop(["Unnamed: 0"],axis=1)
+                df1.to_csv(file_name1,encoding="shift_jis")
+                service.create_blob_from_path(container_name,file_name1,file_name1)
     
     
     

@@ -101,8 +101,8 @@ def handle_message(event):
             #username = user_disp_name
             #userstatus = 0
             #se = pd.Series([user_id,user_disp_name,0],index=df1.columns)
-            df1.append(df1, ignore_index=True)
-            df1.to_csv(file_name1,encoding="shift_jis")
+            df2 = df1.append(df1, ignore_index=True)
+            df2.to_csv(file_name1,encoding="shift_jis")
             service.create_blob_from_path(container_name,file_name1,file_name1)
             messages = "登録しました"
     

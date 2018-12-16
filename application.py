@@ -114,14 +114,16 @@ def handle_message(event):
     
     # ステータスが0の場合
     if status == 0:
+
         # 一覧表示
         if event.message.text == "一覧" or event.message.text == "いちらん":
+            df = pd.read_csv(file_name,encoding="shift_jis", sep=",")
             list = []
             for index, row in df.iterrows():
                 list.append(row["title"])
             # 重複排除
             messages = ','.join(set(list))
-    
+
         # 検索案内
         elif event.message.text == "検索" or event.message.text == "けんさく":
             messages = "検索したい本のタイトルを教えてね"
@@ -131,14 +133,15 @@ def handle_message(event):
             df3 = df3.drop(["Unnamed: 0"],axis=1)
             df3.to_csv(file_name1,encoding="shift_jis")
             service.create_blob_from_path(container_name,file_name1,file_name1)
-    
-    
-    
+
+
+
         else:
             messages = "一覧、検索、借りる、返す、4つの中からお願いしてね"
     
     # 検索処理
     elif status == 1:
+        df = pd.read_csv(file_name,encoding="shift_jis", sep=",")
         list = []
         for index, row in df.iterrows():
             if row["title"].find(event.message.text) != -1:

@@ -79,8 +79,10 @@ def handle_message(event):
     service = BlockBlobService(account_name=account_name,account_key=account_key)
     service.get_blob_to_path(container_name,file_name,'bookdata.csv')
     
+    message = "DLできたっぽい"
+    
     # CSV読み込み
-    df = pd.read_csv(file_name)
+    #df = pd.read_csv(file_name)
     
     """
     # 検索
@@ -119,7 +121,9 @@ def handle_message(event):
     
     service.create_blob_from_path(container_name,file_name,file_name)
     """
-
+    
+    
+    """
 # 3、返す
     messages = ""
     user_id = event.source.user_id
@@ -142,7 +146,7 @@ def handle_message(event):
     df.to_csv(file_name)
     
     service.create_blob_from_path(container_name,file_name,file_name)
-    
+    """
     
     
     # ファイルの削除

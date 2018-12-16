@@ -96,13 +96,13 @@ def handle_message(event):
             messages = "登録済"
             break
         else:
-            df1 = pd.DataFrame(data=[[user_id,user_disp_name,0]],columns=['LINEID','username','userstatus'])
+            df2 = pd.DataFrame(data=[[user_id,user_disp_name,0]],columns=['LINEID','username','userstatus'])
             #LINEID = user_id
             #username = user_disp_name
             #userstatus = 0
             #se = pd.Series([user_id,user_disp_name,0],index=df1.columns)
-            df2 = df1.append(df1, ignore_index=True)
-            df2.to_csv(file_name1,encoding="shift_jis")
+            df3 = df1.append(df2, ignore_index=True)
+            df3.to_csv(file_name1,encoding="shift_jis")
             service.create_blob_from_path(container_name,file_name1,file_name1)
             messages = "登録しました"
     

@@ -77,9 +77,9 @@ def handle_message(event):
     file_name='bookdata.csv'
     
     service = BlockBlobService(account_name=account_name,account_key=account_key)
-    #service.get_blob_to_path(container_name,file_name,'bookdata.csv')
+    service.get_blob_to_path(container_name,file_name,'bookdata.csv')
     
-    message = "DLできたっぽい"
+    messages = "DLできたっぽい"
     
     # CSV読み込み
     #df = pd.read_csv(file_name)
@@ -150,7 +150,7 @@ def handle_message(event):
     
     
     # ファイルの削除
-    #os.remove(file_name)
+    os.remove(file_name)
     
     
     """

@@ -127,11 +127,11 @@ def handle_message(event):
         # 検索案内
         elif event.message.text == "検索" or event.message.text == "けんさく":
             messages = "検索したい本のタイトルを教えてね"
-            for index, row in df3.iterrows():
+            for index, row in df1.iterrows():
                 if row["LINEID"] ==  user_id:
-                    df3.loc[index, 'userstatus'] = 1
-            df3 = df3.drop(["Unnamed: 0"],axis=1)
-            df3.to_csv(file_name1,encoding="shift_jis")
+                    df1.loc[index, 'userstatus'] = 1
+            df1 = df1.drop(["Unnamed: 0"],axis=1)
+            df1.to_csv(file_name1,encoding="shift_jis")
             service.create_blob_from_path(container_name,file_name1,file_name1)
 
 

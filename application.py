@@ -112,7 +112,7 @@ def handle_message(event):
             if messages != "誰か借りてる":
                 messages = "そんな本ないよ"
     
-    df = df.drop(["Unnamed: 0"],axis=1)
+    #df = df.drop(["Unnamed: 0"],axis=1)
     df.to_csv(file_name)
     
     service.create_blob_from_path(container_name,file_name,file_name)

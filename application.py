@@ -134,10 +134,31 @@ def handle_message(event):
             df1.to_csv(file_name1,encoding="shift_jis")
             service.create_blob_from_path(container_name,file_name1,file_name1)
 
+        # 借りる案内
+        elif event.message.text == "借りる" or event.message.text == "かりる":
+            messages = "借りたい本のタイトルを教えてね(完全一致で)"
+            for index, row in df1.iterrows():
+                if row["LINEID"] ==  user_id:
+                    df1.loc[index, 'userstatus'] = 2
+            df1 = df1.drop(["Unnamed: 0"],axis=1)
+            df1.to_csv(file_name1,encoding="shift_jis")
+            service.create_blob_from_path(container_name,file_name1,file_name1)
 
 
+        # 返す案内
+        elif event.message.text == "返す" or event.message.text == "かえす":
+            messages = "返したい本のタイトルを教えてね(完全一致で)"
+            for index, row in df1.iterrows():
+                if row["LINEID"] ==  user_id:
+                    df1.loc[index, 'userstatus'] = 3
+            df1 = df1.drop(["Unnamed: 0"],axis=1)
+            df1.to_csv(file_name1,encoding="shift_jis")
+            service.create_blob_from_path(container_name,file_name1,file_name1)
+
+        # 意味わからん文字打ってきたやつ向けに
         else:
             messages = "一覧、検索、借りる、返す、4つの中からお願いしてね"
+    
     
     # 検索処理
     elif status == 1:
@@ -148,6 +169,73 @@ def handle_message(event):
                 list.append(row["title"])
             # 重複排除
         messages = ','.join(set(list))
+        for index, row in df1.iterrows():
+            if row["LINEID"] ==  user_id:
+                df1.loc[index, 'userstatus'] = 0
+                df1 = df1.drop(["Unnamed: 0"],axis=1)
+                df1.to_csv(file_name1,encoding="shift_jis")
+                service.create_blob_from_path(container_name,file_name1,file_name1)
+    
+    # 借りる処理
+    elif status == 2:
+        df = pd.read_csv(file_name,encoding="shift_jis", sep=",")
+        messages = ""
+        for index, row in df.iterrows():
+            # 指定されたタイトル名の本があった場合
+            if row["title"] == event.message.text :
+                # 貸出可能な場合
+                if row["status"] == 0:
+                    df.loc[index, 'status'] = 1
+                    # rentaluserに代入する値にはLINEIDを入れる
+                    profile = line_bot_api.get_profile(event.source.user_id)
+                    user_disp_name = profile.display_name
+                    #user_id = event.source.user_id
+                    df.loc[index, 'rentaluser'] = user_disp_name
+                    messages = "借りれるよ"
+                    break
+                else:
+                    messages = "誰か借りてる"
+            else:
+                # 指定されたタイトル名の本がなかった場合
+                if messages != "誰か借りてる":
+                    messages = "そんな本ないよ"
+    
+        df = df.drop(["Unnamed: 0"],axis=1)
+        df.to_csv(file_name,encoding="shift_jis")
+        
+        service.create_blob_from_path(container_name,file_name,file_name)
+    
+    
+    # 返す処理
+    elif status == 3:
+        df = pd.read_csv(file_name,encoding="shift_jis", sep=",")
+        messages = ""
+        user_id = event.source.user_id
+        for index, row in df.iterrows():
+            # 指定されたタイトル名の本があった場合
+            if row["title"] == event.message.text :
+            # 借りてるユーザーが一致の場合（LINEIDと比較する必要あり）
+                if row["rentaluser"] == user_id :
+                    df.loc[index, 'status'] = 0
+                    df.loc[index, 'rentaluser'] = 0
+                    messages = "返却しました"
+                    break
+                else:
+                    messages = "借りてないよ"
+            # 指定されたタイトル名の本がなかった場合
+            else:
+                if messages != "借りてないいよ":
+                    messages = "そんな本ないよ"
+        df = df.drop(["Unnamed: 0"],axis=1)
+        df.to_csv(file_name)
+        
+        service.create_blob_from_path(container_name,file_name,file_name)
+    
+    
+    
+    
+    
+    
     
     
     

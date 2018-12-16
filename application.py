@@ -100,7 +100,7 @@ def handle_message(event):
     messages = ','.join(set(list))
     """
     
-    """
+    
     #借りる
     messages = ""
     for index, row in df.iterrows():
@@ -125,7 +125,7 @@ def handle_message(event):
     df.to_csv(file_name)
     
     service.create_blob_from_path(container_name,file_name,file_name)
-    """
+    
     
     
     """

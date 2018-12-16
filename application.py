@@ -93,6 +93,7 @@ def handle_message(event):
             messages = "登録済"
             break
         else:
+            df1 = pd.DataFrame(columns=['LINEID','username','userstatus'])
             LINEID = user_id
             username = user_disp_name
             userstatus = 0

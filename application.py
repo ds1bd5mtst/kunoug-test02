@@ -12,7 +12,6 @@ from linebot.models import (
 import os
 
 import pandas as pd
-import codecs as cd
 
 from azure.storage.blob import (
     BlockBlobService, PublicAccess

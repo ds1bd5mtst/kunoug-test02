@@ -225,7 +225,9 @@ def handle_message(event):
             # 指定されたタイトル名の本があった場合
             if row["title"] == event.message.text :
             # 借りてるユーザーが一致の場合（LINEIDと比較する必要あり）
-                if row["rentaluser"] == user_id :
+                profile = line_bot_api.get_profile(event.source.user_id)
+                user_disp_name = profile.display_name
+                if row["rentaluser"] == user_disp_name :
                     df.loc[index, 'status'] = 0
                     df.loc[index, 'rentaluser'] = 0
                     messages = "返却しました"

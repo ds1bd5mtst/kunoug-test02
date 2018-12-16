@@ -105,7 +105,7 @@ def handle_message(event):
                 user_id        = event.source.user_id
                 df.loc[index, 'rentaluser'] = user_id
                 #df.loc[index, 'rentaluser'] = 1
-                messages = "借りれるよ（仮）"
+                messages = "借りれるよ" + str(user_id)
                 break
             else:
                 messages = "誰か借りてる"

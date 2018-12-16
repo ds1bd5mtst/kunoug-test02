@@ -79,10 +79,12 @@ def handle_message(event):
     service = BlockBlobService(account_name=account_name,account_key=account_key)
     service.get_blob_to_path(container_name,file_name,'bookdata.csv')
     
-    messages = "DLできたっぽい"
+    # messages = "DLできたっぽい"
     
     # CSV読み込み
-    #df = pd.read_csv(file_name)
+    df = pd.read_csv(file_name)
+    
+    messages = "読み込みできたっぽい"
     
     """
     # 検索

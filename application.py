@@ -13,6 +13,8 @@ import os
 
 import pandas as pd
 
+import datetime
+
 from azure.storage.blob import (
     BlockBlobService, PublicAccess
 )
@@ -192,6 +194,7 @@ def handle_message(event):
                     user_disp_name = profile.display_name
                     #user_id = event.source.user_id
                     df.loc[index, 'rentaluser'] = user_disp_name
+                    df.loc[index, 'rentaldate'] = datetime.date.today()
                     messages = "貸し出し完了したよ"
                     break
                 else:
@@ -230,6 +233,7 @@ def handle_message(event):
                 if row["rentaluser"] == user_disp_name :
                     df.loc[index, 'status'] = 0
                     df.loc[index, 'rentaluser'] = 0
+                    df.loc[index, 'rentaldate'] = 0
                     messages = "返却しました"
                     break
                 else:

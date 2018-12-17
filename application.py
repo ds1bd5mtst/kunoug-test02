@@ -85,13 +85,15 @@ def handle_message(event):
     
     df1 = pd.read_csv(file_name1,encoding="utf-8", sep=",")
     
+    messages = "読み込めたよ"
+    
     profile = line_bot_api.get_profile(event.source.user_id)
     user_disp_name = profile.display_name
     user_id = event.source.user_id
     
     #messages = "test"
     
-    
+    """
     # ユーザー登録
     messages = ""
     for index, row in df1.iterrows():
@@ -107,6 +109,7 @@ def handle_message(event):
         df3 = df3.drop(["Unnamed: 0"],axis=1)
         df3.to_csv(file_name1,encoding="utf-8")
         service.create_blob_from_path(container_name,file_name1,file_name1)
+    """
     
     """
     # ステータス確認

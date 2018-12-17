@@ -85,6 +85,7 @@ def handle_message(event):
     
     messages = "DLできたよ"
     
+    """
     df1 = pd.read_csv(file_name1,encoding="utf-8", sep=",")
     
     #messages = "読み込めたよ"
@@ -92,7 +93,7 @@ def handle_message(event):
     profile = line_bot_api.get_profile(event.source.user_id)
     user_disp_name = profile.display_name
     user_id = event.source.user_id
-    
+    """
     #messages = "test"
     
     """

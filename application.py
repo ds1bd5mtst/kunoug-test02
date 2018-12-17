@@ -83,7 +83,7 @@ def handle_message(event):
     service.get_blob_to_path(container_name,file_name,file_name)
     service.get_blob_to_path(container_name,file_name1,file_name1)
     
-    df1 = pd.read_csv(file_name1,encoding="shift_jis", sep=",")
+    df1 = pd.read_csv(file_name1,encoding="utf-8", sep=",")
     
     profile = line_bot_api.get_profile(event.source.user_id)
     user_disp_name = profile.display_name
@@ -105,9 +105,10 @@ def handle_message(event):
         df2 = pd.DataFrame(data=[[user_id,user_disp_name,0]],columns=['LINEID','username','userstatus'])
         df3 = df1.append(df2, ignore_index=True)
         df3 = df3.drop(["Unnamed: 0"],axis=1)
-        df3.to_csv(file_name1,encoding="shift_jis")
+        df3.to_csv(file_name1,encoding="utf-8")
         service.create_blob_from_path(container_name,file_name1,file_name1)
     
+    """
     # ステータス確認
     status = 0
     for index, row in df1.iterrows():
@@ -262,7 +263,7 @@ def handle_message(event):
                 df1 = df1.drop(["Unnamed: 0"],axis=1)
                 df1.to_csv(file_name1,encoding="shift_jis")
                 service.create_blob_from_path(container_name,file_name1,file_name1)
-    
+    """
     
     
     """
@@ -341,7 +342,7 @@ def handle_message(event):
     
     
     # ファイルの削除
-    os.remove(file_name)
+    #os.remove(file_name)
     os.remove(file_name1)
     
     """

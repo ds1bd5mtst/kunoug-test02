@@ -89,7 +89,6 @@ def handle_message(event):
     user_disp_name = profile.display_name
     user_id = event.source.user_id
     
-    
     #messages = "test"
     
     

@@ -84,7 +84,9 @@ def handle_message(event):
     service.get_blob_to_path(container_name,file_name1,file_name1)
     
     df1 = pd.read_csv(file_name1,encoding="shift_jis", sep=",")
+    messages = "yometa"
     
+    """
     profile = line_bot_api.get_profile(event.source.user_id)
     user_disp_name = profile.display_name
     user_id = event.source.user_id
@@ -262,7 +264,7 @@ def handle_message(event):
                 df1 = df1.drop(["Unnamed: 0"],axis=1)
                 df1.to_csv(file_name1,encoding="shift_jis")
                 service.create_blob_from_path(container_name,file_name1,file_name1)
-    
+    """
     
     
     """
